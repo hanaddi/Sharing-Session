@@ -1,0 +1,43 @@
+
+<button id="go">go</button>
+<script>
+
+// var isi = document.querySelector("#isi"), firstLoad = 1;
+// try{
+// 	let i = parseInt(window.localStorage.getItem('__press_slide__'));
+// 	isi.src = slide[i].p;
+// 	window.localStorage.setItem('__press_slide__', i);
+// }catch(e){
+// 	isi.src = slide[0].p;
+// 	window.localStorage.setItem('__press_slide__', 0);
+// }
+
+
+// window.addEventListener('storage', () => {
+// 	let i = parseInt(window.localStorage.getItem('__press_slide__'));
+// 	if(slide[i]){
+// 		if(firstLoad){
+// 			isi.src = slide[i].p;
+// 			firstLoad = 0;
+// 		}else{
+// 			isi.src=slide[i].p; // blink
+// 		}
+// 	}
+// });
+
+
+// for(i=0;i<50;i++) window.isi.contentWindow.postMessage({key:"spawnChar", value: {side: 'L',name: i+'Fat Han'}})
+// l=window.open(location.href, 'name', 'height=500,width=900')
+// window.isi.contentWindow.postMessage({key:"rockFall", value: 'R'})
+
+// window.resizeTo(960, 720);
+window.resizeTo(800, 600);
+const url = window.location.href.replace("present", "interslide");
+document.getElementById('go').addEventListener("click", () => {
+	let a = document.createElement('a');
+	a.setAttribute('href', 'control-panel.php');
+	a.setAttribute('target', '_blank');
+	a.click();
+	window.location = url;
+});
+</script>
