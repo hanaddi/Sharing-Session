@@ -4,7 +4,7 @@ var commands = [
 	{
 		label: "Starting soon",
 		f: function() {
-			slideDiv.setAttribute("style", "background-image: url(/ss0728/base43.svg); background-size: contain;background-position: center center;background-repeat: no-repeat; display: flex; justify-content: center; align-items: center; text-shadow: none; color: white; font-size: 200%; animation: loading-text 1s infinite linear alternate; ");
+			slideDiv.setAttribute("style", "background-image: url(ss0728/base43.svg); background-size: contain;background-position: center center;background-repeat: no-repeat; display: flex; justify-content: center; align-items: center; text-shadow: none; color: white; font-size: 200%; animation: loading-text 1s infinite linear alternate; ");
 			slideDiv.style.zIndex = 2;
 
 			slideDiv.innerHTML = 'Starting Soon';
@@ -32,7 +32,7 @@ var commands = [
 
 
 			slideIframe.style.visibility = "hidden";
-			slideDiv.setAttribute("style", "background-image: url(/ss0728/shop_bg.webp); background-size: cover;background-position: center center;background-repeat: no-repeat;");
+			slideDiv.setAttribute("style", "background-image: url(ss0728/shop_bg.webp); background-size: cover;background-position: center center;background-repeat: no-repeat;");
 			slideDiv.style.zIndex = 1;
 			slideDiv.style.opacity = 1;
 			slideDiv.innerHTML = ``;
@@ -699,7 +699,7 @@ var commands = [
 	{
 		label: "Blank",
 		f: function() {
-			slideDiv.setAttribute("style", "background-image: url(/ss0728/base43.svg); background-size: contain;background-position: center center;background-repeat: no-repeat; display: flex; justify-content: center; align-items: center; text-shadow: none; color: white; font-size: 200%;");
+			slideDiv.setAttribute("style", "background-image: url(ss0728/base43.svg); background-size: contain;background-position: center center;background-repeat: no-repeat; display: flex; justify-content: center; align-items: center; text-shadow: none; color: white; font-size: 200%;");
 			slideDiv.style.zIndex = 2;
 
 			slideDiv.innerHTML = '';
