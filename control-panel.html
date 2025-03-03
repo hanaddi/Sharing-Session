@@ -1,0 +1,327 @@
+<style>
+button, .button {
+	background-color: orange;
+	border: solid 2px #555;
+	border-radius: 2px;
+	cursor: pointer;
+	font-family: sans-serif;
+	font-size: 14px;
+	margin: 2px;
+	padding: 2px;
+}
+button:hover, .button:hover {
+	background-color: bisque;
+	border-color: #999;
+}
+button[disabled], .button[disabled] {
+	background-color: #eee;
+}
+
+#cpanellist input[type="radio"]:checked~* {
+	background-color: chartreuse;
+}
+
+#soundBar, #treshold {
+	position: relative;
+	width: 200px;
+	height: 20px;
+	--volume: 0%;
+	--is-speak: grey;
+	margin: 0;
+}
+#soundBar::before {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 0;
+	height: 100%;
+	width: var(--volume);
+	background-color: purple;
+	z-index: -1;
+}
+#soundBar::after {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 0;
+	height: 100%;
+	width: 100%;
+	background-color: var(--is-speak);
+	z-index: -2;
+}
+
+#micForm {
+	position: relative;
+}
+
+#micForm * {
+	position: absolute;
+	left: 0;
+}
+
+</style>
+<script src="control.js"></script>
+<!-- <script src="commands.js"></script> -->
+<!-- <script src="commands.ss0728.js"></script> -->
+<script src="ss030325.commands.js"></script>
+
+<form autocomplete="off">
+	<input type="checkbox" id="micToggle" /> <label for="micToggle">Mic</label>
+	<div id="micForm">
+		<div id="soundBar"></div>
+		<input type="range" id="treshold" min="0" max="100" step="0.01" value="50">
+	</div>
+</form>
+
+<table>
+	<tr>
+		<td id="cpanellist"></td>
+		<td id="cpanelbtn"></td>
+	</tr>
+</table>
+
+<script>
+document.querySelector('form').addEventListener('submit', ev=>{
+	ev.preventDefault();
+});
+
+// Control speaking
+var speakTreshold = 50;
+let isMicOn = false;
+let isSpeak = false;
+let micStream = null;
+document.querySelector("#micToggle").addEventListener("change", async function (ev) {
+  if (ev.target.checked) {
+    await turnOnMic();
+  } else {
+    turnOffMic();
+  }
+});
+document.querySelector("#treshold").addEventListener("input", async function (ev) {
+	speakTreshold = parseInt(document.querySelector('#treshold').value);
+});
+
+async function turnOnMic() {
+	try {
+		document.querySelector('#treshold').value = speakTreshold;
+    let stream = await navigator.mediaDevices.getUserMedia({
+      audio: {
+        noiseSuppression: true,
+        echoCancellation: true
+      }
+    });
+    runSoundDetection(stream);
+	} catch (e) {
+
+	}
+}
+function turnOffMic(ev) {
+	try {
+		micStream.getTracks().forEach(function(track) {
+		  track.stop();
+		});
+	} catch (er) {
+		console.error(er);
+	}
+	isMicOn = false;
+	setTimeout(function() {
+  	localStorage.setItem("mic_speak", JSON.stringify({
+  		key: 'mic_speak',
+  		value: false,
+  		r: Math.random(),
+  	}));
+	  document.querySelector('#soundBar').style.setProperty('--volume', '0%');
+	}, 200);
+}
+
+function runSoundDetection(stream) {
+		micStream = stream;
+    var context = new AudioContext();
+    var src = context.createMediaStreamSource(stream);
+    var analyser = context.createAnalyser();
+    analyser.fftSize = 64;
+    analyser.minDecibels = -90;
+    analyser.maxDecibels = 0;
+    // analyser.smoothingTimeConstant = 0.8;
+    src.connect(analyser);
+    var bufferLength = analyser.frequencyBinCount;
+    var dataArray = new Uint8Array(bufferLength);
+
+    isMicOn = true;
+
+    function renderFrame() {
+      analyser.getByteFrequencyData(dataArray);
+
+      let volume = dataArray.reduce((a, b) => a + b) / dataArray.length * 100 / 64;
+      // console.log(Math.max(...dataArray));
+      document.querySelector('#soundBar').style.setProperty('--volume', Math.min(100, volume.toFixed(2)) + '%');
+      document.querySelector('#soundBar').value = volume.toFixed(2);
+      let __isSpeak = volume >= speakTreshold;
+      soundBar.style.setProperty('--is-speak', __isSpeak? "limegreen" : "khaki");
+      if (__isSpeak != isSpeak) {
+      	isSpeak = __isSpeak;
+      	localStorage.setItem("mic_speak", JSON.stringify({
+      		value: isSpeak,
+      		r: Math.random(),
+      	}));
+      }
+      if (isMicOn) requestAnimationFrame(renderFrame);
+    }
+    renderFrame();
+  };
+
+
+// document.requestStorageAccess();
+
+// var f_storage = [];
+// window.addEventListener('storage', (ev) => {
+// 	for(let f of f_storage){
+// 		f(ev);
+// 	}
+
+// 	// console.log(ev);
+// 	// if(ev.key == ls_slide){
+// 	// 	url = window.localStorage.getItem(ls_slide);
+// 	// 	if(url != window.location.href){
+// 	// 		window.location = url;
+// 	// 	}
+// 	// }
+// });
+
+
+
+// window.addEventListener("message", (event) => {
+// 	// if (event.origin !== "http://example.com:8080") return;
+
+// 	// event.source is window.opener
+// 	// event.data is "hello there!"
+
+// 	// console.log(event);
+
+// 	// event.source.postMessage(
+// 	// 	"hi there yourself!  the secret response " + "is: rheeeeet!",
+// 	// 	event.origin,
+// 	// );
+// });
+
+
+// gmeet chat
+var sendJelly = false;
+f_storage.push(function(ev) {
+	if (ev.key != "gmeet_chat") return;
+	if (!sendJelly) return;
+	try {
+		let param = JSON.parse(ev.newValue);
+		console.log(param);
+		let options = {
+			'a': 'L',
+			'b': 'R',
+		};
+		let answer = param.chat.toLowerCase();
+		if (!options.hasOwnProperty(answer)) return;
+		if (['Anda', 'You'].indexOf(param.name) !== -1) return;
+
+      	localStorage.setItem("gmeet_chat", JSON.stringify({
+      		value: {
+      			key:"spawnChar",
+      			value: {side: options[answer], name: param.name, bump:0}
+      		},
+      		r: Math.random(),
+      	}));
+
+		// slideIframe.contentWindow.postMessage({key:"spawnChar", value: {side: options[answer], name: param.name, bump:0}})
+	} catch(e){}
+});
+
+
+
+onload=e=>{
+	// set controllers
+	for(let i in commands) {
+		let c = commands[i];
+		let idx = "command_" + i;
+
+		let div = document.createElement('div');
+		div.style.marginTop = "5px";
+		let input = document.createElement('input');
+		input.setAttribute('type', 'radio');
+		input.setAttribute('name', 'command');
+		input.setAttribute('style', 'display: none;');
+		input.setAttribute('id', idx);
+		let btnAction = document.createElement('label');
+		btnAction.innerText = "\u23E9";
+		btnAction.setAttribute('class', 'button');
+		btnAction.setAttribute('for', idx);
+		let label = document.createElement('span');
+		label.innerText = i + " " + c.label;
+
+		btnAction.onclick = function() {
+			// console.log(i);
+		  	localStorage.setItem("exe_cmd", JSON.stringify({
+		  		value: [i],
+		  		r: Math.random(),
+		  	}));
+		  	(c.fc ?? function(){})();
+
+		  	cpanelbtn.innerHTML='';
+		  	for(let bi in (c.btns ?? [])) {
+		  		let b = c.btns[bi];
+		  		let eb = document.createElement("button");
+		  		eb.innerText = b.label;
+		  		eb.onclick = function() {
+				  	localStorage.setItem("exe_cmd", JSON.stringify({
+				  		value: [i, 'btns', bi],
+				  		r: Math.random(),
+				  	}));
+				  	(b.fc ?? function(){})();
+		  		};
+		  		cpanelbtn.appendChild(eb);
+		  		cpanelbtn.appendChild(document.createElement('br'));
+		  	}
+
+		  	if (c.note) {
+		  		const div = document.createElement("div");
+		  		div.innerHTML = c.note;
+		  		cpanelbtn.appendChild(div);
+		  	}
+
+		};
+
+		// ((idx, input, btnAction)=>{
+		// 	input.setAttribute('id', idx);
+		// 	btnAction.setAttribute('for', idx);
+		// 	console.log(idx);
+		// })(idx, input, btnAction);
+
+		div.appendChild(input);
+		div.appendChild(btnAction);
+		div.appendChild(label);
+		cpanellist.appendChild(div);
+
+	}
+}
+
+// manage ed rotation
+window.addEventListener("mousemove", function(ev) {
+	// let x = (ev.clientX/window.innerWidth*20 - 10).toFixed(2)*1;
+	// let y = (ev.clientY/window.innerHeight*20 - 10).toFixed(2)*1;
+
+  let x = (ev.clientX/window.innerWidth*30 - 15).toFixed(2)*1;
+  let y = (ev.clientY/window.innerHeight*30 - 15).toFixed(2)*1;
+
+  if (x<-10)x=-10;
+  if (y<-10)y=-10;
+  if (x>10)x=10;
+  if (y>10)y=10;
+    
+  	localStorage.setItem("ed_rot", JSON.stringify({
+  		value: {
+  			x,
+  			y,
+  			t: 0.5,
+  		},
+  		r: Math.random(),
+  	}));
+});
+
+</script>
