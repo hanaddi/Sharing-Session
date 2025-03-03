@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>ss030325.interslide.php</title>
+  <link rel="stylesheet" type="text/css" href="ss030325.ed.css">
+</head>
+<body style="background-color: #f4b654; position: relative;" class="present-mode">
+
+<iframe id="slideIframe" class="full" style='background-color: khaki;'></iframe>
+<div id="slideDiv" class="full" style=''></div>
+<div id="slideDiv2" class="full" style=''></div>
+
+<div class="ved" id="canvas">
+  <div class="roundbody levitate">
+    <div class="body g_line">
+      <div id="panellinebodyr">
+        <div id="linebodyr" class="g_line"></div>
+      </div>
+      
+      <div id="panellinebodyl">
+        <div id="linebodyl" class="g_line"></div>
+      </div>
+    </div>
+    
+<!-- start right ear -->
+    <div id="panelearr">
+      <div id="earr">
+        <div id="earrmask" class="g_line"></div>
+      </div>
+      <div id="earrtop"></div>
+    </div>
+<!-- end right ear -->
+    
+<!-- start left ear -->
+    <div id="panelearl">
+      <div id="earl">
+        <div id="earlmask" class="g_line"></div>
+      </div>
+      <div id="earltop"></div>
+    </div>
+<!-- end left ear -->
+    
+    <div id="panelface">
+      <div id="facex">
+      	<div id="facescreen">
+      		<div class="screen">
+            <!-- <div class="content" id="mespeak"> <span class="sound"></span> <br/><br/><br/><br/><br/>&nbsp;<br/>&nbsp;</div> -->
+          </div>
+          <div class="screen" id="edface">
+          </div>
+            
+          <dic class="screen" id="faceeyes">
+            <dic class="content pimples" style=""></dic>
+            <dic class="content mouthdefault" id="mouthdefault"></dic>
+            <dic class="content mouthspeak" id="mouthspeak"></dic>
+            <dic class="content tada" id="tada"></dic>
+            <dic class="content display" id="eddisplay"></dic>
+          </dic>
+          <div class="screen overlay"></div>
+      	</div>
+      </div>
+      <div id="acc_glasses"></div>
+      <!-- <div id="acc_glasses_shadow"></div> -->
+    </div>
+
+
+    <div id="panelhat" style="">
+      <div id="panelhattop">
+        <div id="hattop" class="g_line" style="">
+          <div id="hattopr" class="g_line" style="">
+            <!-- <div style="background-color: transparent; width: 100%; height: 100%; transform: scale(1,2)">WEEB</div> -->
+          </div>
+          <div id="hattopl" class="g_line"></div>
+          <div id="hatline"></div>
+          <div id="hattopdot" class="g_line"></div>
+        </div>
+      </div>
+      <div id="xline"></div>
+      <div id="pompom"></div>
+      <div id="hatbutton" class="g_line"></div>
+    </div>
+    
+  </div>
+</div>
+
+<style>
+* {
+	cursor: default;
+/*	cursor: url(/ss0728/pointer.svg) 1 1, default;*/
+}
+.full {
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	left: 0;
+	top: 0;
+}
+
+
+#slideDiv2 {
+	font-family: 'Trebuchet MS', tahoma, verdana, arial;
+}
+
+#slideDiv {
+	font-family: 'Trebuchet MS', tahoma, verdana, arial;
+	color: #223344;
+	font-weight: 600;
+	text-shadow: 1px 1px 0px #ffe, -1px -1px 0px #ffe,
+		0px 0px 30px #ffe, 0px 0px 30px #ffe,
+		0px 0px 30px #ffe, 0px 0px 30px #ffe,
+		0px 0px 30px #ffe, 0px 0px 30px #ffe,
+		0px 0px 30px #ffe, 0px 0px 30px #ffe,
+		0px 0px 30px #ffe, 0px 0px 30px #ffe,
+		0px 0px 30px #ffe, 0px 0px 30px #ffe,
+		0px 0px 30px #ffe, 0px 0px 30px #ffe;
+}
+#slideDiv .title {
+	font-size: 300%;
+	text-shadow: 1px 2px 0px #000, -1px -2px 0px #000, 0px 0px 5px #ff4;
+}
+
+/*#slideDiv li:not(:last-child) {*/
+#slideDiv li {
+	margin-top: 20px;
+/*	text-shadow: 1px 1px 0px #ffe, -1px -1px 0px #ffe;*/
+}
+#slideDiv li:hover {
+	text-shadow: 1px 1px 0px #ffe, -1px -1px 0px #ffe,
+		0px 0px 30px #ffe, 0px 0px 30px #ff0,
+		0px 0px 30px #ffe, 0px 0px 30px #ff0,
+		0px 0px 30px #ffe, 0px 0px 30px #ff0,
+		0px 0px 30px #ffe, 0px 0px 30px #ff0;
+}
+#slideDiv .normal {
+	text-shadow: 0px 0px 0px #000, 0px 0px 0px #000, 0px 0px 0px #ff4;
+}
+
+.hoverzoom {
+	transition-duration: 0.3s;
+}
+.hoverzoom:hover {
+	transform: scale(1.2);
+	background: radial-gradient(circle, rgba(254,255,25,1) 0%, rgba(254,255,157,1) 51%, rgba(0,212,255,0) 94%);
+}
+</style>
+
+
+<script src="control.js"></script>
+<script src="ss030325.commands.js"></script>
+<script src="ss030325.ed.js"></script>
+
+
+<script>
+window.addEventListener("mousemove", function(ev) {
+	// let x = (ev.clientX/window.innerWidth*20 - 10).toFixed(2)*1;
+	// let y = (ev.clientY/window.innerHeight*20 - 10).toFixed(2)*1;
+
+	let x = (ev.clientX/window.innerWidth*30 - 15).toFixed(2)*1;
+	let y = (ev.clientY/window.innerHeight*30 - 15).toFixed(2)*1;
+
+	let maxMove = 10;
+	if (x < -maxMove) x = -maxMove;
+	if (y < -maxMove) y = -maxMove;
+	if (x > maxMove) x = maxMove;
+	if (y > maxMove) y = maxMove;
+
+	edSetRot(x, y, 0.5);
+});
+setStateX(edvars.rx);
+setStateY(-edvars.ry);
+
+// control rotate
+f_storage.push(function(ev) {
+	if (ev.key != "ed_rot") return;
+	try {
+		let param = JSON.parse(ev.newValue);
+		edSetRot(param.value.x, param.value.y, param.value.t ?? 0.5);
+		// console.log(param.value);
+	} catch(e){}
+});
+
+
+onload = () => {
+	try {
+
+		if (localStorage.exe_cmd) {
+			let param = JSON.parse(localStorage.exe_cmd);
+			let c = commands;
+			for (let i of param.value) {
+				c = c[i];
+			}
+			c.f();
+		} else {
+			commands[0].f();
+		}
+
+	} catch (e) {}
+};
+
+</script>
+
+
+
+<script>
+tadaon = () => {
+    try{
+    	faceeyes.style.backgroundImage = "none";
+    	mouthspeak.style.visibility = "hidden";
+    	mouthdefault.style.visibility = "hidden";
+    	tada.style.visibility = "visible";
+    }catch(e){}
+}
+
+tadaoff = () => {
+    try{
+    	faceeyes.style.backgroundImage = "url(/img/screen-eddefault-eyes.svg)";
+    	mouthspeak.style.visibility = "hidden";
+    	mouthdefault.style.visibility = "visible";
+    	tada.style.visibility = "hidden";
+    }catch(e){}
+}
+
+
+// control speak
+// let lastSpeak = 0;
+f_storage.push(function(ev) {
+	if (ev.key != "mic_speak") return;
+	// let now = (new Date()).getTime();
+	// console.log(now - lastSpeak);
+	// if (now - lastSpeak <= 200) return;
+	// lastSpeak = now;
+	try {
+		let param = JSON.parse(ev.newValue);
+		if (param.value) {
+			edSpeakOn();
+		} else {
+			edSpeakOff();
+		}
+	} catch(e){}
+});
+
+// execute command
+f_storage.push(function(ev) {
+	if (ev.key != "exe_cmd") return;
+	try {
+		let param = JSON.parse(ev.newValue);
+		let c = commands;
+		for (let i of param.value) {
+			c = c[i];
+		}
+		c.f();
+
+	} catch(e){}
+});
+
+// answer quiz
+f_storage.push(function(ev) {
+	if (ev.key != "gmeet_chat") return;
+	try {
+		let param = JSON.parse(ev.newValue);
+		slideIframe.contentWindow.postMessage(param.value);
+
+	} catch(e){}
+});
+
+
+</script>
+
+
+</body>
+</html>
