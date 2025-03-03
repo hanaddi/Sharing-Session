@@ -94,7 +94,7 @@ var commands = [
 			edChar.style.transitionTimingFunction = 'ease-out';
 			slideIframe.style.visibility = "hidden";
 			slideDiv.setAttribute("style", "background-image: url(ss030325/bg.svg); background-size: contain;background-position: center center;background-repeat: no-repeat; display: flex; justify-content: center; align-items: center; text-shadow: none; color: black; font-size: 450%; text-align: center;");
-			slideDiv.innerHTML = '<div><div style="font-size: 40%; opacity: 0">Why I watch</div>VTubers<br><img src="ss030325/risu1.svg" style="width: 40vw;"></div>';
+			slideDiv.innerHTML = '<div><div style="font-size: 40%; opacity: 1">The Cool Things About</div>VTubers<br><img src="ss030325/risu1.svg" style="width: 40vw;"></div>';
 			slideDiv.style.zIndex = 1;
 			slideDiv.style.opacity = 1;
 		}
@@ -262,6 +262,7 @@ var commands = [
 		},
 		note: "<ul>"
 			+"<li>Cheapest</li>"
+			+"<li>Lightweight</li>"
 			+"</ul>",
 	},
 
@@ -337,8 +338,8 @@ var commands = [
 			// table += '<td colspan="2"><img style="height: 30vh;" src="ss030325/dokibird-shock.gif"></td>';
 
 			table += '<td colspan="2">';
-			table += '<div style="height: 35vh;width: 45vh; background: red; background-image: url(ss030325/miko1.gif); background-size: 110% auto; background-position: center bottom; display: inline-block;"></div>';
-			table += '<div style="height: 35vh;width: 45vh; background: red; background-image: url(ss030325/miko1.gif); background-size: 100% auto; background-position: center top; display: inline-block;"></div>';
+			table += '<div style="height: 35vh;width: 45vh; background: grey; background-image: url(ss030325/miko1.gif); background-size: 110% auto; background-position: center bottom; display: inline-block;"></div>';
+			table += '<div style="height: 35vh;width: 45vh; background: grey; background-image: url(ss030325/miko1.gif); background-size: 100% auto; background-position: center top; display: inline-block;"></div>';
 			table += '</td>';
 
 			table += '</tr>';
@@ -375,7 +376,8 @@ var commands = [
 			slideIframe.style.visibility = "hidden";
 		},
 		note: "<ul>"
-			+"<li></li>"
+			+"<li>Wider capabilities</li>"
+			+"<li>Expensive equipments</li>"
 			+"</ul>",
 	},
 
@@ -468,7 +470,9 @@ var commands = [
 			slideIframe.style.visibility = "hidden";
 		},
 		note: "<ul>"
-			+"<li></li>"
+			+"<li>interations with chat</li>"
+			+"<li>karaoke</li>"
+			+"<li>collabs</li>"
 			+"</ul>",
 	},
 
@@ -503,10 +507,10 @@ var commands = [
 	},
 
 	{
-		label: "[2] Viwers",
+		label: "[2] Viewers",
 		f: function() {
 			slideDiv.setAttribute("style", "background-image: url(ss030325/bg.svg); background-size: contain;background-position: center center;background-repeat: no-repeat; display: flex; justify-content: center; align-items: center; text-shadow: none; color: black; font-size: 350%; text-align: center;");
-			slideDiv.innerHTML = '<span>Viwers<br><img src="ss030325/pemaloe.jpg" style="height: 30vh;"><br>&nbsp;</span>';
+			slideDiv.innerHTML = '<span>Viewers<br><img src="ss030325/pemaloe.jpg" style="height: 30vh;"><br>&nbsp;</span>';
 			slideDiv.style.zIndex = 1;
 			slideDiv.style.opacity = 1;
 			slideDiv.style.visibility = "visible";
@@ -552,10 +556,10 @@ var commands = [
 	},
 
 	{
-		label: "[2] VTuber X Viewers: Hastags",
+		label: "[2] VTuber X Viewers: Hashtags",
 		f: function() {
 			slideDiv.setAttribute("style", "background-image: url(ss030325/viewers-hastags.svg); background-size: contain;background-position: center center;background-repeat: no-repeat; text-shadow: none; color: black; font-size: 250%;");
-			slideDiv.innerHTML = '<div style="padding: 20px;">Hastags</div>';
+			slideDiv.innerHTML = '<div style="padding: 20px;">Hashtags</div>';
 			slideDiv.style.zIndex = 1;
 			slideDiv.style.opacity = 1;
 			slideDiv.style.visibility = "visible";
@@ -578,7 +582,7 @@ var commands = [
 	},
 
 	{
-		label: "[2] VTuber X Viewers: Hastags (2)",
+		label: "[2] VTuber X Viewers: Hashtags (2)",
 		f: function() {
 			slideDiv.setAttribute("style", "background-image: url(ss030325/viewers-contents.svg); background-size: contain;background-position: center center;background-repeat: no-repeat; text-shadow: none; color: black; font-size: 250%;");
 			slideDiv.innerHTML = '<div style="padding: 20px;">Viewers\' Contents</div>';
@@ -605,7 +609,7 @@ var commands = [
 	},
 
 	{
-		label: "[2] VTuber X Viewers: Hastags (3)",
+		label: "[2] VTuber X Viewers: Hashtags (3)",
 		f: function() {
 			slideDiv.setAttribute("style", "background-image: url(ss030325/viewers-contents-commis.svg); background-size: contain;background-position: center center;background-repeat: no-repeat; text-shadow: none; color: black; font-size: 250%;");
 			slideDiv.innerHTML = '<div style="padding: 20px;">Viewers\' Contents</div>';
@@ -632,7 +636,7 @@ var commands = [
 	},
 
 	{
-		label: "[2] VTuber X Viewers: Hastags (4)",
+		label: "[2] VTuber X Viewers: Hashtags (4)",
 		f: function() {
 			slideDiv.setAttribute("style", "background-image: url(ss030325/viewers-contents-commis-open.svg); background-size: contain;background-position: center center;background-repeat: no-repeat; text-shadow: none; color: black; font-size: 250%;");
 			slideDiv.innerHTML = '<div style="padding: 20px;">Viewers\' Contents</div>';
@@ -666,7 +670,7 @@ var commands = [
 			slideDiv.innerHTML = '<span>Thank You<br></span>';
 			slideDiv.innerHTML += '<div style="font-size: 25%; text-align: left; padding: 10px; line-height: 1;">Sources:<ul>'
 				+'<li>https://www.researchgate.net/figure/Figure-B4-CodeMiko-vitual-3D-avatar-Left-and-Youna-Kang-the-human-behind-avatar_fig10_366836517</li>'
-				+'<li>https://powerrangers.fandom.com/wiki/Storm_Megazord</li>'
+				// +'<li>https://powerrangers.fandom.com/wiki/Storm_Megazord</li>'
 				+'<li>https://tenor.com/view/dokibird-doki-huh-vtuber-shock-gif-8264548511385952861</li>'
 				+'<li>https://www.youtube.com/shorts/O_MVDDKyhMs</li>'
 				+'<li>https://hololive.hololivepro.com/en</li>'
@@ -735,3 +739,46 @@ https://hololive.hololivepro.com/en/talents/kaela-kovalskia/
 https://www.youtube.com/@KaelaKovalskia
 
 */
+
+
+for (let i in commands) {
+	let f = commands[i].f;
+	commands[i].f = () => {
+		// console.log("Slide: "+commands[i].label);
+		f();
+		// document.getElementById("slideCaching").innerHTML = '<div style="position: fixed; left: 10%; visibility: visible;">'
+		// slideDiv.innerHTML += '<div style="position: fixed; left: 10%; visibility: visible;">'
+		slideCaching.innerHTML = '<div style="position: fixed; left: 10%; visibility: visible;">'
+			+'<img src="ss0728/base43.svg">'
+			+'<img src="ss0728/shop_bg.webp">'
+			+'<img src="ss030325/edbot1.png">'
+			+'<img src="ss030325/risu1.svg">'
+			+'<img src="ss030325/bg.svg">'
+			+'<img src="ss030325/codemiko1.png">'
+			+'<img src="ss030325/hololive.svg">'
+			+'<img src="ss030325/model-png.gif">'
+			+'<img src="ss030325/model-2d-optimized.gif">'
+			+'<img src="ss030325/model-3d-optimized.gif">'
+			+'<img src="ss030325/model-png-idle.png">'
+			+'<img src="ss030325/model-png-speaking.png">'
+			+'<img src="ss030325/dokibird-doki.gif">'
+			+'<img src="ss030325/miko1.gif">'
+			+'<img src="ss030325/hololive.gif">'
+			+'<img src="ss030325/Kizunaai.webp">'
+			+'<img src="ss030325/NeuroSamaV3.webp">'
+			+'<img src="ss030325/Evil_Neuro_portrait_4.webp">'
+			+'<img src="ss030325/neuro-error.png">'
+			+'<img src="ss030325/pemaloe.jpg">'
+			+'<img src="ss030325/talent-viewers.svg">'
+			+'<img src="ss030325/viewers-hastags.svg">'
+			+'<img src="ss030325/viewers-contents.svg">'
+			+'<img src="ss030325/viewers-contents-commis.svg">'
+			+'<img src="ss030325/viewers-contents-commis-open.svg">'
+			+'<img src="">'
+			+'<img src="">'
+			+'<img src="">'
+			+'<img src="">'
+			+'<img src="">'
+			+'</div>';
+	};
+}
